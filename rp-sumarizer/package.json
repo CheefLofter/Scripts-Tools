@@ -1,0 +1,36 @@
+{
+  "name": "paperlens",
+  "version": "0.1.0",
+  "description": "Turn research papers into a 10-minute study guide with one Gemini call.",
+  "type": "module",
+  "bin": {
+    "paperlens": "./dist/cli.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "bun run src/cli.ts",
+    "build": "bun build src/cli.ts --target=bun --outdir=dist --external playwright",
+    "test": "bun test",
+    "typecheck": "tsc --noEmit",
+    "lint": "biome check .",
+    "format": "biome format --write .",
+    "pdf-setup": "playwright install chromium"
+  },
+  "dependencies": {
+    "@google/genai": "^3.6.1",
+    "ajv": "^8.17.1",
+    "markdown-it": "^15.0.3",
+    "playwright": "^1.65.1"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.6.8",
+    "@types/bun": "latest",
+    "@types/markdown-it": "latest",
+    "typescript": "latest"
+  },
+  "engines": {
+    "bun": ">=1.4.0"
+  }
+}

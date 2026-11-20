@@ -1,0 +1,137 @@
+{
+  "meta": {
+    "topic": "data leakage",
+    "topic_found": true,
+    "topic_note": "Both papers touch on how evaluation data can leak into training.",
+    "papers": [
+      {
+        "title": "Attention Is All You Need",
+        "authors": "Vaswani et al.",
+        "year": "2017",
+        "venue": "NeurIPS",
+        "source": "arXiv:1706.03762",
+        "one_liner": "The Transformer replaces recurrence with attention."
+      },
+      {
+        "title": "A Study of Data Leakage",
+        "authors": "Doe and Roe",
+        "year": "2024",
+        "venue": "ExampleConf",
+        "source": "doi:10.0000/example",
+        "one_liner": "A controlled study of leakage in benchmark splits."
+      }
+    ]
+  },
+  "summary": "The first paper introduces the Transformer, while the second studies how benchmark leakage can inflate reported results.",
+  "big_picture": {
+    "explanation": "The Transformer processes all tokens in parallel instead of one at a time.",
+    "analogy": "It is like reading a whole page at once instead of moving a finger along each word.",
+    "why_it_matters": "Parallel processing made large language models practical to train."
+  },
+  "method": {
+    "steps": [
+      {
+        "paper": "Paper 1",
+        "title": "Embed the tokens",
+        "explanation": "Tokens are mapped to vectors and combined with positional information."
+      },
+      {
+        "paper": "Paper 1",
+        "title": "Apply attention",
+        "explanation": "Each position attends to every other position in the sequence."
+      }
+    ],
+    "diagrams": [
+      {
+        "paper": "Paper 1",
+        "caption": "Transformer flow",
+        "nodes": [
+          { "id": "input", "label": "Input tokens" },
+          { "id": "encoder", "label": "Encoder stack" },
+          { "id": "output", "label": "Output probabilities" }
+        ],
+        "edges": [
+          { "from": "input", "to": "encoder", "label": "embeddings" },
+          { "from": "encoder", "to": "output", "label": "attention" }
+        ]
+      }
+    ]
+  },
+  "jargon": [
+    {
+      "term": "Attention",
+      "definition": "A mechanism that lets each token weigh the relevance of other tokens.",
+      "why_it_matters": "It replaces recurrence as the main way to mix information."
+    },
+    {
+      "term": "Data leakage",
+      "definition": "Test information accidentally available during training or model selection.",
+      "why_it_matters": "It makes benchmark scores look better than they are."
+    }
+  ],
+  "key_numbers": [
+    {
+      "paper": "Paper 1",
+      "label": "BLEU",
+      "value": "28.4",
+      "context": "WMT 2014 English-to-German translation",
+      "location": "Table 2, p. 8",
+      "quote": "Our model achieves 28.4 BLEU on the WMT 2014 English-to-German task.",
+      "confidence": "high"
+    }
+  ],
+  "charts": [
+    {
+      "paper": "Paper 1",
+      "type": "bar",
+      "title": "BLEU on WMT 2014",
+      "x_label": "Model",
+      "y_label": "BLEU",
+      "categories": ["Baseline", "Transformer"],
+      "series": [{ "label": "BLEU", "values": [26.0, 28.4] }],
+      "source_quote": "The baseline reaches 26.0 BLEU, while our model achieves 28.4 BLEU.",
+      "location": "Table 2, p. 8",
+      "caption": "Headline BLEU comparison."
+    }
+  ],
+  "limitations": [
+    {
+      "paper": "Paper 1",
+      "limitation": "Attention is quadratic in sequence length, which limits very long inputs."
+    },
+    {
+      "paper": "Paper 2",
+      "limitation": "The leakage estimate depends on the benchmark's split metadata."
+    }
+  ],
+  "skip_guide": {
+    "read_closely": [
+      {
+        "section": "Methods (Section 3)",
+        "reason": "It defines the architecture and the experimental setup."
+      }
+    ],
+    "safe_to_skip": [
+      {
+        "section": "Related work",
+        "reason": "It is useful background but not needed to understand the result."
+      }
+    ]
+  },
+  "comparison": {
+    "columns": ["Aspect", "Paper 1", "Paper 2"],
+    "rows": [
+      ["Problem", "Sequence transduction", "Leakage in benchmark evaluation"],
+      ["Method", "Transformer", "Controlled split experiments"]
+    ],
+    "takeaway": "The papers address different problems, but both show that evaluation design changes the headline number."
+  },
+  "topic_connections": [
+    {
+      "paper": "Paper 2",
+      "connection": "Leakage can inflate benchmark scores when test data appears in training.",
+      "location": "Section 3",
+      "quote": "We find that 12% of test examples appear in the training split."
+    }
+  ]
+}
